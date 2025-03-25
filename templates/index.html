@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif; /* apply Poppins as the default font */
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px; 
+    color: #333;
+    line-height: 1.6; /* improve spacing for readability */
+    margin-bottom: 15px; /* add space between paragraphs */
+}
+
+</style>
+<body>
+    <p>YES IT WORKS</p>
+    <form>
+        <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name" required>
+        </div>
+        <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name" required>
+        </div>
+        <div>
+            <label for="e_mail">E-Mail</label>
+            <input type="email" name="e_mail" id="e_mail" required>
+        </div>
+        <div>
+            <label for="start_date">Date</label>
+            <input type="date" name="start_date" id="start_date" required>
+        </div>
+        <div>
+            <label for="">Current Occupation</label>
+            <br>
+
+            <div id="occupation">
+                <input type="radio" name="occupation" id="employed" required>
+                <label for="employed">Employed</label>
+                
+                <input type="radio" name="occupation" id="unemployed" required>
+                <label for="unemployed">Unemployed</label>
+                
+                <input type="radio" name="occupation" id="self-employed" required>
+                <label for="self-employed">Self-employed</label>
+
+                <input type="radio" name="occupation" id="student" required>
+                <label for="student">Student</label>
+            </div>
+
+        </div>
+        <button type="button">Submit</button>
+    </form>
+</body>
+</html>
