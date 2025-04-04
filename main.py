@@ -29,9 +29,16 @@ class DataBase(db.Model):
     start_date = db.Column(db.Date)
     occupation = db.Column(db.String(80))
 
-# application page
+
+# home page
 @app.route("/", methods = ["GET","POST"])
-def index():
+def home():
+    return render_template("home.html")
+
+
+# application page
+@app.route("/application", methods = ["GET","POST"])
+def application():
     
     if request.method == "POST":
         first_name = request.form["first_name"]
@@ -67,6 +74,10 @@ def index():
         flash("Your form was submited successfully.", "success")
 
     return render_template("application.html")
+
+
+
+
 
 if __name__ == "__main__":
     with app.app_context():
