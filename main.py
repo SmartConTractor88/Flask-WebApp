@@ -29,7 +29,7 @@ class DataBase(db.Model):
     start_date = db.Column(db.Date)
     occupation = db.Column(db.String(80))
 
-# main page
+# application page
 @app.route("/", methods = ["GET","POST"])
 def index():
     
@@ -66,7 +66,7 @@ def index():
 
         flash("Your form was submited successfully.", "success")
 
-    return render_template("index.html")
+    return render_template("application.html")
 
 if __name__ == "__main__":
     with app.app_context():
