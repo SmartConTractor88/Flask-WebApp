@@ -36,9 +36,21 @@ def home():
     return render_template("home.html")
 
 
+# projects page
+@app.route("/projects", methods = ["GET","POST"])
+def projects():
+    return render_template("projects.html")
+
+
+#art page
+@app.route("/art", methods = ["GET","POST"])
+def art():
+    return render_template("art.html")
+
+
 # application page
-@app.route("/application", methods = ["GET","POST"])
-def application():
+@app.route("/contact", methods = ["GET","POST"])
+def contact():
     
     if request.method == "POST":
         first_name = request.form["first_name"]
@@ -73,10 +85,14 @@ def application():
 
         flash("Your form was submited successfully.", "success")
 
-    return render_template("application.html")
+    return render_template("contact.html")
 
 
+# blog page
 
+@app.route("/blog", methods = ["GET","POST"])
+def blog():
+    return render_template("blog.html")
 
 
 if __name__ == "__main__":
