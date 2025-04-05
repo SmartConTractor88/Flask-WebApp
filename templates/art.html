@@ -17,8 +17,9 @@
     
     .title {
     text-align: center;
-    padding-top: 20px; /* increase distance from top */
-    font-size: 80px;
+    padding-top: 60px; /* increase distance from top */
+    padding-top: 60px; 
+    font-size: 100px;
     }
 
     .navbar-nav .nav-link {
@@ -28,10 +29,24 @@
     }
 
     .art_content {
-        max-width: 50%;
-        height: auto;
+        display: flex;
+        padding-top: 60px; 
     }
-    
+    .art_content:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .column {
+        flex: 50%;
+    }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        padding-bottom: 100px;
+    }
 </style>
 
 <body>
@@ -69,9 +84,18 @@
     <h1 class="title">THIS IS ART</h1>
 
     <div class="art_content">
-
-
-
+        <div class="column">
+            <img src="static/image-c1.png" alt="" class="center">
+            <img src="static/image-b1.png" alt="" class="center">
+            <img src="static/image-c2.png" alt="" class="center">
+            <img src="static/image-b2.png" alt="" class="center">
+        </div>
+        <div class="column">
+            <img src="static/image-b3.png" alt="" class="center">
+            <img src="static/image-c3.png" alt="" class="center">
+            <img src="static/image-b4.png" alt="" class="center">
+            <img src="static/image-c4.png" alt="" class="center">
+        </div>
     </div>
 </body>
 </html>
