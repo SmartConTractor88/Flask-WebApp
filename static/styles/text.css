@@ -8,6 +8,7 @@
 .subtitle {
     text-align: center;
     padding-top: 20px; /* increase distance from top */
+    padding-bottom: 20px;
     font-size: 40px; 
 }
 
@@ -16,4 +17,11 @@
     padding-left: 20px;
     padding-top: 20px; /* increase distance from top */
     font-size: 20px; 
+}
+
+.description {
+    text-align: center;
+    color: rgb(122, 122, 122);
+    padding-top: 0px; /* increase distance from top */
+    font-size: 20px;    
 }
