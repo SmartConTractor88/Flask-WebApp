@@ -25,8 +25,9 @@ class DataBase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
-    e_mail = db.Column(db.String(80))
-    start_date = db.Column(db.Date)
+    email = db.Column(db.String(80))
+    message = db.Column(db.String(1000))
+    date = db.Column(db.Date)
     occupation = db.Column(db.String(80))
 
 
@@ -55,35 +56,37 @@ def contact():
     if request.method == "POST":
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
-        e_mail = request.form["e_mail"]
-        date = request.form["start_date"]
+        email = request.form["email"]
+        message = request.form["message"]
+        date = request.form["date"]
         date_object = datetime.strptime(date, "%Y-%m-%d")
         occupation = request.form["occupation"]
         print(first_name)
         print(last_name)
         print(date_object)
-        print(e_mail)
+        print(email)
+        print(message)
         print(occupation)
         
         form = DataBase(first_name=first_name, last_name=last_name, 
-                        e_mail=e_mail, start_date=date_object, occupation=occupation)
+                        email=email, message=message, date=date_object, occupation=occupation)
         
         db.session.add(form)
         db.session.commit()
 
-        message_body = f"""{first_name}, your submission was successful.
-        We will reach out to you asap.
+        response_text = f"""{first_name}, thank you for your message.
+        I will reach out to you asap.
         Regards
         """
 
-        message = Message(subject="Submission Successfull", 
+        response = Message(subject="Submission Successfull", 
                           sender=app.config["MAIL_USERNAME"],
-                          recipients=[e_mail],
-                           body=message_body)
+                          recipients=[email],
+                           body=response_text)
         
-        mail.send(message)
+        mail.send(response)
 
-        flash("Your form was submited successfully.", "success")
+        flash("Your e-mail was sent.", "success")
 
     return render_template("contact.html")
 

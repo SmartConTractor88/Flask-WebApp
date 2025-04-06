@@ -119,22 +119,32 @@ p {
     <div class="container">
         <p class="subtitle">Send an E-mail</p>
         <form method="post">
+
             <div class="from group mb-4">
                 <label for="first_name">First Name</label>
                 <input class="form-control" type="text" name="first_name" id="first_name" required>
             </div>
+
             <div class="from group mb-4">
                 <label for="last_name">Last Name</label>
                 <input class="form-control" type="text" name="last_name" id="last_name" required>
             </div>
+
             <div class="from group mb-4">
-                <label for="e_mail">E-Mail</label>
-                <input class="form-control" type="email" name="e_mail" id="e_mail" required>
+                <label for="email">E-Mail</label>
+                <input class="form-control" type="email" name="email" id="email" required>
             </div>
+
             <div class="from group mb-4">
-                <label for="start_date">Date</label>
-                <input class="form-control" type="date" name="start_date" id="start_date" required>
+              <label for="message">Message</label>
+              <textarea class="form-control" type="text" name="message" id="message" rows="5" required></textarea>
             </div>
+
+            <div class="from group mb-4">
+                <label for="date">Date</label>
+                <input class="form-control" type="date" name="date" id="date" required>
+            </div>
+
             <div class="from group mb-4">
                 <label class="from group mb-2">Current Occupation</label>
                 <br>
@@ -154,6 +164,7 @@ p {
                 </div>
 
             </div>
+
             <button class="btn btn-secondary mb-4" type="submit">Submit</button>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
