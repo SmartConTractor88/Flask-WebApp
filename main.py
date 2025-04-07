@@ -19,7 +19,20 @@ db = SQLAlchemy(app) # create a database instance
 
 mail = Mail(app)
 
-# create a database module
+# send email function
+
+def send_email(mail_content):
+
+    msg = Message(
+        subject="Portfolio Web App Mail",
+        sender=app.config["MAIL_USERNAME"],
+        recipients=[app.config["MAIL_USERNAME"]],                      
+    )
+    msg.body=mail_content 
+    mail.send(msg)
+
+
+# create a database model
 
 class DataBase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,7 +62,7 @@ def art():
     return render_template("art.html")
 
 
-# application page
+# contact page
 @app.route("/contact", methods = ["GET","POST"])
 def contact():
     
@@ -59,21 +72,26 @@ def contact():
         email = request.form["email"]
         message = request.form["message"]
         date = request.form["date"]
-        date_object = datetime.strptime(date, "%Y-%m-%d")
+        date_object = datetime.strptime(date, "%Y-%m-%d") # to add to database
         occupation = request.form["occupation"]
-        print(first_name)
-        print(last_name)
-        print(date_object)
-        print(email)
-        print(message)
-        print(occupation)
+
+        # send an email
+        mail_content = message + '\n' + '\n' + \
+            first_name + ' ' + last_name + ', ' + occupation + '\n' + \
+                'Chosen date:' + date + '\n' + \
+                'E-mail:' + ' ' + email
         
+        print(mail_content)
+        send_email(mail_content=mail_content)
+        
+        # add data to database
         form = DataBase(first_name=first_name, last_name=last_name, 
                         email=email, message=message, date=date_object, occupation=occupation)
         
         db.session.add(form)
         db.session.commit()
 
+        # respond automatically
         response_text = f"""{first_name}, thank you for your message.
         I will reach out to you asap.
         Regards
@@ -86,6 +104,7 @@ def contact():
         
         mail.send(response)
 
+        # flash message of success
         flash("Your e-mail was sent.", "success")
 
     return render_template("contact.html")
