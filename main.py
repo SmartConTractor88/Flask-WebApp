@@ -19,8 +19,8 @@ db = SQLAlchemy(app) # create a database instance
 
 mail = Mail(app)
 
-# send email function
 
+# send email function
 def send_email(mail_content):
 
     msg = Message(
@@ -29,6 +29,22 @@ def send_email(mail_content):
         recipients=[app.config["MAIL_USERNAME"]],                      
     )
     msg.body=mail_content 
+    mail.send(msg)
+
+
+# send auto-response function
+def auto_response(name, recipient):
+
+    response_text = name + ', thank you for your message.' + '\n' + \
+          'I will reach out to you asap.' + '\n' + \
+            'Regards'
+
+    msg = Message(
+        subject="Thanks for Reaching Out",
+        sender=app.config["MAIL_USERNAME"],
+        recipients=[recipient],                      
+    )
+    msg.body=response_text 
     mail.send(msg)
 
 
@@ -92,17 +108,8 @@ def contact():
         db.session.commit()
 
         # respond automatically
-        response_text = f"""{first_name}, thank you for your message.
-        I will reach out to you asap.
-        Regards
-        """
-
-        response = Message(subject="Submission Successfull", 
-                          sender=app.config["MAIL_USERNAME"],
-                          recipients=[email],
-                           body=response_text)
-        
-        mail.send(response)
+        with app.app_context():
+            auto_response(name=first_name, recipient=email)
 
         # flash message of success
         flash("Your e-mail was sent.", "success")
